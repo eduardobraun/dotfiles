@@ -2,7 +2,6 @@
 export ZSH=$HOME/.oh-my-zsh
 export WORKON_HOME=$HOME/.virtualenvs
 
-# ZSH_THEME="bullet-train"
 ZSH_THEME="daveverwer"
 
 POWERLINE_DETECT_SSH="true"
