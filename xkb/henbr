@@ -1,0 +1,24 @@
+/////////////////////////////////////////////////////////////////////////////////
+//
+// Basic us layout with extra symbols for typing in portuguese without switching
+// the keyboard layout.
+// 
+// Eduardo Braun - 2015/10/03
+//
+
+xkb_symbols "basic"
+{
+  name[Group1] = "Hybrid US Keyboard with BR symbols";
+  include "us(basic)"
+  key <AC01> {	[	  a,	A, atilde, Atilde]	};
+  key <AB03> {	[	  c,	C, ccedilla, Ccedilla]	};
+  key <AD03> {	[	  e,	E, ecircumflex, Ecircumflex]	};
+
+  key <AC10> { [       NoSymbol,       NoSymbol,       ccedilla,       Ccedilla ] };
+  key <AC11> { [       NoSymbol,       NoSymbol, dead_tilde, dead_circumflex ] };
+  key <AD11> { [       NoSymbol,       NoSymbol, dead_acute, dead_grave ] };
+
+  include "level3(ralt_switch)"
+  include "compose(rctrl)"
+};
+
