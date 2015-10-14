@@ -150,4 +150,3 @@ bar {
         status_command i3status
 }
 
-bindsym ^[[11 workspace 1
