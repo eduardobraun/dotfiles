@@ -45,12 +45,6 @@ map <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
 map <Leader>s :split <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
 map <Leader>v :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
 
-map <C-h> :nohl<cr>
-imap <C-l> :<Space>
-map <C-s> <esc>:w<CR>
-imap <C-s> <esc>:w<CR>
-:inoremap <CR> <Esc>
-
 imap <c-e> <c-o>$
 imap <c-a> <c-o>^
 
@@ -161,10 +155,6 @@ function! SearchForCallSites(term)
   cexpr system('ag ' . shellescape(a:term) . '\| grep -v def')
 endfunction
 
-
-" inoremap <Tab> <C-P>
-
-" Let's be reasonable, shall we?
 nmap k gk
 nmap j gj
 
@@ -175,11 +165,8 @@ let g:CommandTMatchWindowAtTop=1
 " situations.
 set timeoutlen=500
 
-" Don't go past 100 chars on levelup:
-autocmd BufNewFile,BufRead /Users/ben/code/levelup/*.rb set colorcolumn=100
-
-" Remove trailing whitespace on save for ruby files.
-au BufWritePre *.rb :%s/\s\+$//e
+" Remove trailing whitespace on save for py files.
+au BufWritePre *.py :%s/\s\+$//e
 
 " Set gutter background to black
 highlight SignColumn ctermbg=black
