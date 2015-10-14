@@ -150,6 +150,4 @@ bar {
         status_command i3status
 }
 
-setxkbmap -layout de,gb
-setxkbmap -option 'grp:menu_toggle'
-
+bindsym ^[[11 workspace 1
