@@ -18,6 +18,8 @@ xkb_symbols "basic"
   key <AC11> {[NoSymbol, NoSymbol, dead_tilde, dead_circumflex]};
   key <AD11> {[NoSymbol, NoSymbol, dead_acute, dead_grave]};
 
+  key <CAPS> { [Escape,       Escape,       Escape,        Escape] };
+
   include "level3(ralt_switch)"
   include "compose(rctrl)"
 };

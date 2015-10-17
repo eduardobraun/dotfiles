@@ -27,6 +27,7 @@ Plugin 'spolu/dwm.vim'
 Plugin 'tpope/vim-classpath'
 Plugin 'tpope/vim-fireplace'
 Plugin 'tpope/vim-leiningen'
+Plugin 'kchmck/vim-coffee-script'
 Plugin 'nanotech/jellybeans.vim'
 
 call vundle#end()
