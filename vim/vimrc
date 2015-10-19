@@ -71,10 +71,9 @@ set ignorecase smartcase
 set laststatus=2  " Always show status line.
 set relativenumber
 set gdefault " assume the /g flag on :s substitutions to replace all matches in a line
-set autoindent " always set autoindenting on
+set autoindent
 set bg=light
 
-" Set the tag file search order
 set tags=./tags;
 
 " Make the omnicomplete text readable
@@ -116,9 +115,6 @@ set wildmode=list:full
 set noesckeys
 set ttimeout
 set ttimeoutlen=1
-
-" Turn on spell-checking in markdown and text.
-" au BufRead,BufNewFile *.md,*.txt setlocal spell
 
 " Merge a tab into a split in the previous window
 function! MergeTabs()
