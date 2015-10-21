@@ -4,6 +4,7 @@ export WORKON_HOME=$HOME/.virtualenvs
 
 ZSH_THEME="daveverwer"
 
+# Powertline options
 POWERLINE_DETECT_SSH="true"
 POWERLINE_GIT_CLEAN="✔"
 POWERLINE_GIT_DIRTY="✘"
@@ -19,6 +20,7 @@ POWERLINE_RIGHT_A="exit-status"
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
 
+# oh-my-zsh plugins
 plugins=(git django github virtualenv virtualenvwrapper vundle systemd
          httpie pip cp colorize)
 
