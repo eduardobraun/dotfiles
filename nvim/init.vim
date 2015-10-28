@@ -23,6 +23,7 @@ let g:loaded_python3_provider = 1
 
 " Mappings
 let mapleader = ","
+nmap <leader>c :nohl<CR>
 nmap j gj
 nmap k gk
 
