@@ -35,7 +35,8 @@ bindsym $mod+Shift+q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id j4-dmenu-desktop
 
 # change focus
 bindsym $mod+j focus left
@@ -144,3 +145,9 @@ bar {
         status_command i3status
 }
 
+# Merge .Xresource on i3 initialization
+exec --no-startup-id xrdb -merge ~/.Xresources
+# Restores nitrogen wallpaper
+exec --no-startup-id nitrogen --restore
+# Sets keyboard layout to henbr
+exec --no-startup-id setxkbmap henbr

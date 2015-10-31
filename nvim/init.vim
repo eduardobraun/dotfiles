@@ -18,7 +18,7 @@ filetype plugin indent on
 colorscheme jellybeans
 syntax on
 
-let g:python_host_prog = '/usr/bin/python'
+let g:python_host_prog = '/usr/bin/python2'
 let g:loaded_python3_provider = 1
 
 " Mappings

@@ -20,8 +20,6 @@ Xft.rgba: rgb
 Xft.hinting: true
 Xft.hintstyle: hintslight
 
-
-
 URxvt*font                   : xft:Inconsolata for Powerline:size=14
 URxvt*depth                  : 32
 URxvt*transparent            : false
@@ -37,8 +35,7 @@ URxvt*pointerBlank           : true
 URxvt*cursorBlink            : false
 URxvt*meta8                  : false
 URxvt*modifer                : ctrl
-Rxvt*modifer                 : ctrl
-URxvt.perl-ext-common        : matcher
+URxvt*perl-ext-common        : matcher
 URxvt*url-launcher           : /usr/bin/google-chrome
 URxvt*urlLauncher            : /usr/bin/google-chrome
 URxvt*iso14755               : false

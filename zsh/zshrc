@@ -31,3 +31,4 @@ source $ZSH/oh-my-zsh.sh
 
 for config ($HOME/.dotfiles/zsh/zsh.d/*.zsh) source $config
 
+xrdb -merge ~/.Xresources
