@@ -10,6 +10,7 @@ Plug 'bling/vim-airline'
 Plug 'Valloric/YouCompleteMe'
 Plug 'rhysd/vim-clang-format'
 Plug 'kchmck/vim-coffee-script'
+Plug 'kennethzfeng/vim-raml'
 
 " Add plugins to &runtimepath
 call plug#end()
