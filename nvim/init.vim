@@ -27,6 +27,8 @@ let mapleader = ","
 nmap <leader>c :nohl<CR>
 nmap j gj
 nmap k gk
+nmap <leader>p "+p
+nmap <leader>y "+y
 
 set backspace=indent,eol,start
 set history=1000
