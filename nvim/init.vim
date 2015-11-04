@@ -11,6 +11,8 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'rhysd/vim-clang-format'
 Plug 'kchmck/vim-coffee-script'
 Plug 'kennethzfeng/vim-raml'
+Plug 'xolox/vim-easytags'
+Plug 'xolox/vim-misc'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -86,7 +88,7 @@ set list listchars=tab:»·,trail:·
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 
-" Header guard
+" C/C++ Header guard
 function! s:insert_gates()
     let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
     execute "normal! i#ifndef " . gatename
@@ -96,14 +98,21 @@ function! s:insert_gates()
 endfunction
 autocmd BufNewFile *.{h,hpp} call <SID>insert_gates()
 
+" YouCompleteMe configuration
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_use_ultisnips_completer = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_server_keep_logfiles = 1
 
-let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
-let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
-let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
-let g:ycm_complete_in_comments = 1 " Completion in comments
-let g:ycm_complete_in_strings = 1 " Completion in string
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" UltiSnips configuration
 let g:UltiSnipsExpandTrigger="<c-x>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" EasyTags configuration
+:let g:easytags_dynamic_files = 1
+:let g:easytags_events = ['BufWritePost']
+:let g:easytags_autorecurse = 1
+:let g:easytags_include_members = 1
