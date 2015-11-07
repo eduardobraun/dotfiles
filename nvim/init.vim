@@ -13,6 +13,7 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'kennethzfeng/vim-raml'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
+Plug 'scrooloose/syntastic'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -116,3 +117,14 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 :let g:easytags_events = ['BufWritePost']
 :let g:easytags_autorecurse = 1
 :let g:easytags_include_members = 1
+
+" Syntastic configuration
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
