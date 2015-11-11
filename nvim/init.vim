@@ -14,6 +14,8 @@ Plug 'kennethzfeng/vim-raml'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-unimpaired'
+Plug 'alfredodeza/pytest.vim'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -32,6 +34,14 @@ nmap j gj
 nmap k gk
 nmap <leader>p "+p
 nmap <leader>y "+y
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
 
 set backspace=indent,eol,start
 set history=1000
