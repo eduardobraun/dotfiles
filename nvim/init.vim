@@ -11,8 +11,6 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'rhysd/vim-clang-format'
 Plug 'kchmck/vim-coffee-script'
 Plug 'kennethzfeng/vim-raml'
-Plug 'xolox/vim-easytags'
-Plug 'xolox/vim-misc'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-unimpaired'
 Plug 'alfredodeza/pytest.vim'
@@ -121,12 +119,6 @@ let g:ycm_server_keep_logfiles = 1
 let g:UltiSnipsExpandTrigger="<c-x>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" EasyTags configuration
-:let g:easytags_dynamic_files = 1
-:let g:easytags_events = ['BufWritePost']
-:let g:easytags_autorecurse = 1
-:let g:easytags_include_members = 1
 
 " Syntastic configuration
 set statusline+=%#warningmsg#
