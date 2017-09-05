@@ -29,6 +29,7 @@ Plugin 'tpope/vim-fireplace'
 Plugin 'tpope/vim-leiningen'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'nanotech/jellybeans.vim'
+Plugin 'fatih/vim-go'
 
 call vundle#end()
 filetype plugin indent on

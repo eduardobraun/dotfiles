@@ -20,7 +20,8 @@ Xft.rgba: rgb
 Xft.hinting: true
 Xft.hintstyle: hintslight
 
-URxvt*font                   : xft:Inconsolata for Powerline:size=14
+/* URxvt*font                   : xft:Inconsolata for Powerline:size=14 */
+URxvt*font                   : xft:Inconsolata Nerd Font:size=14
 URxvt*depth                  : 32
 URxvt*transparent            : false
 URxvt*letterspace            : -1
@@ -42,3 +43,17 @@ URxvt*iso14755               : false
 URxvt*iso14755_52            : false
 URxvt*antialias              : true
 
+! ------------------------------------------------------------------------------
+! ROFI Color theme
+! Copyright: Étienne Deparis
+! ------------------------------------------------------------------------------
+! "Color scheme for normal row" Set from: File
+rofi.color-normal:                   argb:00272822, #f8f8f2, argb:00272822, #141411, #f8f8f2
+! "Color scheme for urgent row" Set from: File
+rofi.color-urgent:                   argb:00272822, #f92672, argb:00272822, #f92672, #f8f8f2
+! "Color scheme for active row" Set from: File
+rofi.color-active:                   argb:00272822, #a6e22a, argb:00272822, #141411, #a6e22a
+! "Color scheme window" Set from: File
+rofi.color-window:                   argb:ee272822, #002b36, #e6db74
+! "Separator style (none, dash, solid)" Set from: File
+rofi.separator-style:                solid

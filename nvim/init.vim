@@ -11,9 +11,14 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'rhysd/vim-clang-format'
 Plug 'kchmck/vim-coffee-script'
 Plug 'kennethzfeng/vim-raml'
-Plug 'scrooloose/syntastic'
+Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-unimpaired'
 Plug 'alfredodeza/pytest.vim'
+Plug 'fatih/vim-go'
+Plug 'cespare/vim-toml'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'lervag/vimtex'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -66,6 +71,7 @@ set autoindent
 set bg=light
 set shiftround " When at 3 spaces and I hit >>, go to 4, not 5.
 set nofoldenable " Say no to code folding...
+set tabstop=4
 
 
 set tags=./tags;
@@ -114,11 +120,13 @@ let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 let g:ycm_server_keep_logfiles = 1
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
 
 " UltiSnips configuration
 let g:UltiSnipsExpandTrigger="<c-x>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " Syntastic configuration
 set statusline+=%#warningmsg#
@@ -130,3 +138,4 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+let g:airline_powerline_fonts = 1
