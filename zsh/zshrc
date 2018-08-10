@@ -3,6 +3,8 @@ export ZSH=$HOME/.oh-my-zsh
 export WORKON_HOME=$HOME/.virtualenvs
 export MAKEFLAGS=-j16
 
+POWERLEVEL9K_MODE='nerdfont-complete'
+
 ZSH_THEME="daveverwer"
 
 # Powertline options
@@ -37,3 +39,5 @@ for config ($HOME/.dotfiles/zsh/zsh.d/*.zsh) source $config
 xset s off -dpms
 
 command -v vg >/dev/null 2>&1 && eval "$(vg eval --shell zsh)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

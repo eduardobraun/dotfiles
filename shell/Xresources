@@ -21,10 +21,12 @@ Xft.hinting: true
 Xft.hintstyle: hintslight
 
 /* URxvt*font                   : xft:Inconsolata for Powerline:size=14 */
-URxvt*font                   : xft:Inconsolata Nerd Font:size=14
+/* URxvt*font                   : xft:Inconsolata Nerd Font:size=14 */
+URxvt*font: xft:Sauce Code Pro Nerd Font Complete Mono:regular:size=15
+/* URxvt*font: xft:TerminessTTF Nerd Font Mono:regular:size=15 */
 URxvt*depth                  : 32
 URxvt*transparent            : false
-URxvt*letterspace            : -1
+URxvt*letterSpace            : -5
 URxvt*scrollBar              : false
 URxvt*scrollBar_Right        : true
 URxvt*scrollstyle            : plain
@@ -39,8 +41,8 @@ URxvt*modifer                : ctrl
 URxvt*perl-ext-common        : matcher
 URxvt*url-launcher           : /usr/bin/google-chrome
 URxvt*urlLauncher            : /usr/bin/google-chrome
-URxvt*iso14755               : false
-URxvt*iso14755_52            : false
+URxvt*iso14755               : true
+URxvt*iso14755_52            : true
 URxvt*antialias              : true
 
 ! ------------------------------------------------------------------------------

@@ -1,3 +1,11 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+syntax on
+let g:python3_host_prog = '/usr/bin/python3'
+let g:python_host_prog = '/usr/bin/python2'
+set number
+set tabstop=2 shiftwidth=2 expandtab
+
 call plug#begin('~/.config/nvim/plugged')
 
 " Group dependencies, vim-snippets depends on ultisnips
@@ -7,19 +15,47 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-projectionist'
 Plug 'bling/vim-airline'
-Plug 'Valloric/YouCompleteMe'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'rhysd/vim-clang-format'
-Plug 'kchmck/vim-coffee-script'
 Plug 'kennethzfeng/vim-raml'
 Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-unimpaired'
 Plug 'alfredodeza/pytest.vim'
 Plug 'fatih/vim-go'
 Plug 'cespare/vim-toml'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'lervag/vimtex'
 
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+
+" FZF / Ctrlp for file navigation
+if executable('fzf')
+  " OSX vs Linux loading (depending on where fzf is)
+  let s:uname = system("echo -n \"$(uname)\"")
+  if !v:shell_error && s:uname == "Darwin"
+    Plug '/usr/local/opt/fzf'
+  else
+    Plug 'junegunn/fzf', {'dir': '~/.local/src/fzf', 'do': './install --all' }
+  endif
+  Plug 'junegunn/fzf.vim'
+else
+  Plug 'ctrlpvim/ctrlp.vim'
+endif
+
+" Rust Plugins
+if executable('rustc')
+  Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+  Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+endif
+
+Plug 'ryanoasis/vim-devicons'
 " Add plugins to &runtimepath
 call plug#end()
 
@@ -27,8 +63,9 @@ filetype plugin indent on
 colorscheme jellybeans
 syntax on
 
-let g:python_host_prog = '/usr/bin/python2'
-let g:loaded_python3_provider = 1
+
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#rust#rust_source_path='/home/peer/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/'
 
 " Mappings
 let mapleader = ","
@@ -96,6 +133,8 @@ function! RenameFile()
 endfunction
 map <Leader>n :call RenameFile()<cr>
 
+map <Leader>b :silent !{make display} <cr>
+
 " Display extra whitespace
 set list listchars=tab:»·,trail:·
 
@@ -137,5 +176,30 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+" let g:syntastic_rust_checkers = ['rustc']
+let g:syntastic_rust_checkers = ['cargo']
 
-let g:airline_powerline_fonts = 1
+" airline
+set laststatus=2
+let g:airline_left_sep=""
+let g:airline_left_alt_sep="|"
+let g:airline_right_sep=""
+let g:airline_right_alt_sep="|"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#tab_nr_type = 1 " show tab number not number of split panes
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline_theme='jellybeans'
+" let g:airline#extensions#hunks#enabled = 0
+" let g:airline_section_z = ""
+" if get(g:, 'airline_theme', 'notloaded') == 'notloaded'
+"   source ~/.config/nvim/custom/customairline.vim
+"   let g:airline_theme="customairline"
+" endif
+
+let g:rustfmt_autosave = 1
+
+map <leader>cl :mark '<CR>:! cargo +nightly clippy <CR>
+
