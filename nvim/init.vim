@@ -18,13 +18,14 @@ Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'rhysd/vim-clang-format'
 Plug 'kennethzfeng/vim-raml'
-Plug 'vim-syntastic/syntastic'
+" Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-unimpaired'
 Plug 'alfredodeza/pytest.vim'
 Plug 'fatih/vim-go'
 Plug 'cespare/vim-toml'
 Plug 'airblade/vim-gitgutter'
 Plug 'lervag/vimtex'
+Plug 'w0rp/ale'
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -152,16 +153,6 @@ function! s:insert_gates()
 endfunction
 autocmd BufNewFile *.{h,hpp} call <SID>insert_gates()
 
-" YouCompleteMe configuration
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_use_ultisnips_completer = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_complete_in_comments = 1
-let g:ycm_complete_in_strings = 1
-let g:ycm_server_keep_logfiles = 1
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
-
 " UltiSnips configuration
 let g:UltiSnipsExpandTrigger="<c-x>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -171,13 +162,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-" let g:syntastic_rust_checkers = ['rustc']
-let g:syntastic_rust_checkers = ['cargo']
 
 " airline
 set laststatus=2
@@ -192,14 +176,15 @@ let g:airline#extensions#tabline#tab_nr_type = 1 " show tab number not number of
 let g:airline#extensions#tabline#show_close_button = 0
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline_theme='jellybeans'
-" let g:airline#extensions#hunks#enabled = 0
-" let g:airline_section_z = ""
-" if get(g:, 'airline_theme', 'notloaded') == 'notloaded'
-"   source ~/.config/nvim/custom/customairline.vim
-"   let g:airline_theme="customairline"
-" endif
 
 let g:rustfmt_autosave = 1
 
-map <leader>cl :mark '<CR>:! cargo +nightly clippy <CR>
+let g:ale_rust_rls_executable = 'rls'
+let g:ale_rust_rls_toolchain = 'nightly'
+let g:ale_rust_rustc_options = '-Z no-codegen'
+let g:ale_linters = {'rust': ['rls']}
+let g:ale_fixers = {'rust': ['remove_trailing_lines', 'rustfmt', 'trim_whitespaces']}
+nmap <silent> <C-p> <Plug>(ale_previous_wrap)
+nmap <silent> <C-n> <Plug>(ale_next_wrap)
+
 
