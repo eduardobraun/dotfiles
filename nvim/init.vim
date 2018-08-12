@@ -179,6 +179,9 @@ let g:airline_theme='jellybeans'
 
 let g:rustfmt_autosave = 1
 
+" ALE maps
+map <Leader>e :ALEDetail<cr>
+" ALE config
 let g:ale_rust_rls_executable = 'rls'
 let g:ale_rust_rls_toolchain = 'nightly'
 let g:ale_rust_rustc_options = '-Z no-codegen'
