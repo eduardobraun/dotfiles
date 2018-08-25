@@ -5,7 +5,7 @@ export MAKEFLAGS=-j16
 
 POWERLEVEL9K_MODE='nerdfont-complete'
 
-ZSH_THEME="daveverwer"
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Powertline options
 POWERLINE_DETECT_SSH="true"
@@ -41,3 +41,4 @@ xset s off -dpms
 command -v vg >/dev/null 2>&1 && eval "$(vg eval --shell zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme

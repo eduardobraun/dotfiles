@@ -27,6 +27,10 @@ Plug 'airblade/vim-gitgutter'
 Plug 'lervag/vimtex'
 Plug 'w0rp/ale'
 
+" Python
+Plug 'zchee/deoplete-jedi'
+Plug 'tell-k/vim-autopep8'
+
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -185,9 +189,14 @@ map <Leader>e :ALEDetail<cr>
 let g:ale_rust_rls_executable = 'rls'
 let g:ale_rust_rls_toolchain = 'nightly'
 let g:ale_rust_rustc_options = '-Z no-codegen'
-let g:ale_linters = {'rust': ['rls']}
+let g:ale_linters = {
+      \'rust': ['rls'],
+      \'markdown': ['proselint', 'redpen', 'vale'],
+      \'text': ['proselint', 'vale'],
+      \}
 let g:ale_fixers = {'rust': ['remove_trailing_lines', 'rustfmt', 'trim_whitespaces']}
+let g:ale_lint_on_enter = 1
 nmap <silent> <C-p> <Plug>(ale_previous_wrap)
 nmap <silent> <C-n> <Plug>(ale_next_wrap)
 
-
+" autocmd BufWritePre *.py 0,$!yapf
