@@ -22,28 +22,30 @@ Xft.hintstyle: hintslight
 
 /* URxvt*font                   : xft:Inconsolata for Powerline:size=14 */
 /* URxvt*font                   : xft:Inconsolata Nerd Font:size=14 */
-URxvt*font: xft:Sauce Code Pro Nerd Font Complete Mono:regular:size=15
+/* URxvt.font: xft:Cousine Nerd Font:size=15 */
+URxvt.font: xft:Cousine Nerd Font:style=Light:pixelsize=15:antialias=true:hinting=true
 /* URxvt*font: xft:TerminessTTF Nerd Font Mono:regular:size=15 */
-URxvt*depth                  : 32
-URxvt*transparent            : false
-URxvt*letterSpace            : -5
-URxvt*scrollBar              : false
-URxvt*scrollBar_Right        : true
-URxvt*scrollstyle            : plain
-URxvt*scrollTtyOutput        : false
-URxvt*scrollTtyKeypress      : true
-URxvt*reverseVideo           : false
-URxvt*saveLines              : 100000
-URxvt*pointerBlank           : true
-URxvt*cursorBlink            : false
-URxvt*meta8                  : false
-URxvt*modifer                : ctrl
-URxvt*perl-ext-common        : matcher
-URxvt*url-launcher           : /usr/bin/google-chrome
-URxvt*urlLauncher            : /usr/bin/google-chrome
-URxvt*iso14755               : true
-URxvt*iso14755_52            : true
-URxvt*antialias              : true
+URxvt.depth                  : 32
+URxvt.transparent            : false
+/* URxvt*letterSpace            : -5 */
+/* URxvt.letterSpace            : 3 */
+URxvt.scrollBar              : false
+URxvt.scrollBar_Right        : true
+URxvt.scrollstyle            : plain
+URxvt.scrollTtyOutput        : false
+URxvt.scrollTtyKeypress      : true
+URxvt.reverseVideo           : false
+URxvt.saveLines              : 100000
+URxvt.pointerBlank           : true
+URxvt.cursorBlink            : false
+URxvt.meta8                  : false
+URxvt.modifer                : ctrl
+URxvt.perl-ext-common        : matcher
+URxvt.url-launcher           : /usr/bin/google-chrome
+URxvt.urlLauncher            : /usr/bin/google-chrome
+URxvt.iso14755               : true
+URxvt.iso14755_52            : true
+URxvt.antialias              : true
 
 ! ------------------------------------------------------------------------------
 ! ROFI Color theme
