@@ -28,18 +28,15 @@ Plug 'andymass/vim-matchup'
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-projectionist'
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'rhysd/vim-clang-format'
 Plug 'kennethzfeng/vim-raml'
-" Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-unimpaired'
 Plug 'alfredodeza/pytest.vim'
 Plug 'fatih/vim-go'
+Plug 'hexdigest/gounit-vim'
 Plug 'cespare/vim-toml'
 Plug 'airblade/vim-gitgutter'
 Plug 'lervag/vimtex'
-Plug 'w0rp/ale'
 
 " JS/TS/Vue
 Plug 'posva/vim-vue'
@@ -48,16 +45,10 @@ Plug 'Quramy/tsuquyomi'
 Plug 'Quramy/vim-js-pretty-template'
 
 " Python
-Plug 'zchee/deoplete-jedi'
 Plug 'tell-k/vim-autopep8'
 
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'antoinemadec/coc-fzf'
 
 
 " FZF / Ctrlp for file navigation
@@ -77,7 +68,6 @@ endif
 " Rust Plugins
 if executable('rustc')
   Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-  " Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 endif
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
@@ -87,18 +77,95 @@ Plug 'autozimu/LanguageClient-neovim', {
 Plug 'Shougo/echodoc.vim'
 
 Plug 'ryanoasis/vim-devicons'
+
+Plug 'tpope/vim-fugitive'
 " Add plugins to &runtimepath
 call plug#end()
 
+" lightline
+let g:lightline = {
+  \ 'colorscheme': 'wombat',
+  \ 'active': {
+  \   'left': [
+  \     [ 'mode', 'paste' ],
+  \     [ 'fugitive', 'git', 'diagnostic', 'cocstatus', 'filename', 'method' ]
+  \   ],
+  \   'right':[
+  \     [
+  \       'lineinfo',
+  \     ],
+  \     [
+  \       'dicon',
+  \       'fileencoding'
+  \     ],
+  \     [ 'blame' ]
+  \   ],
+  \ },
+  \ 'component_function': {
+  \   'filename': 'LightlineFilename',
+  \   'blame': 'LightlineGitBlame',
+  \   'dicon': 'LightlineWebDevIcons',
+  \   'fugitive': 'LightlineFugitive',
+  \ },
+  \ 'subseparator': { 'left': '|', 'right': '|' }
+\ }
+
+function! LightlineModified()
+  return &ft ==# 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightlineReadonly()
+  return &ft !~? 'help' && &readonly ? 'RO' : ''
+endfunction
+
+function! LightlineFilename()
+  let fname = expand('%:t')
+  return fname ==# 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
+        \ fname =~# '^__Tagbar__\|__Gundo\|NERD_tree' ? '' :
+        \ &ft ==# 'vimfiler' ? vimfiler#get_status_string() :
+        \ &ft ==# 'unite' ? unite#get_status_string() :
+        \ &ft ==# 'vimshell' ? vimshell#get_status_string() :
+        \ (LightlineReadonly() !=# '' ? LightlineReadonly() . ' ' : '') .
+        \ (fname !=# '' ? fname : '[No Name]') .
+        \ (LightlineModified() !=# '' ? ' ' . LightlineModified() : '')
+endfunction
+
+
+function! LightlineFugitive()
+  try
+    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*FugitiveHead')
+      let mark = ''  " edit here for cool mark
+      let branch = FugitiveHead()
+      return branch !=# '' ? mark.branch : ''
+    endif
+  catch
+  endtry
+  return ''
+endfunction
+
+function! LightlineGitBlame() abort
+  let blame = get(b:, 'coc_git_blame', '')
+  " return blame
+  return winwidth(0) > 120 ? blame : ''
+endfunction
+
+function! LightlineWebDevIcons() abort
+  return &buftype ==# 'terminal' || &filetype =~# 'denite\|tagbar' ? '' :
+        \ winwidth(0) > 120 ? (strlen(&filetype) ? (exists('*WebDevIconsGetFileTypeSymbol') ?  WebDevIconsGetFileTypeSymbol() : &filetype) : 'no ft') : ''
+endfunction
+
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+
+nnoremap <c-space> :Rg<cr>
+noremap <leader>s :Rg<cr><c-w>
+
 filetype plugin indent on
-" colorscheme jellybeans
-colorscheme base16-gruvbox-dark-medium
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
-syntax on
 
+let g:tex_flavor = 'latex'
 
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#rust#rust_source_path='/home/peer/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/'
@@ -110,14 +177,6 @@ nmap j gj
 nmap k gk
 nmap <leader>p "+p
 nmap <leader>y "+y
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-tnoremap <C-h> <C-\><C-n><C-w>h
-tnoremap <C-j> <C-\><C-n><C-w>j
-tnoremap <C-k> <C-\><C-n><C-w>k
-tnoremap <C-l> <C-\><C-n><C-w>l
 
 set backspace=indent,eol,start
 set history=1000
@@ -150,6 +209,13 @@ set tabstop=4
 set tags=./tags;
 
 highlight StatusLine ctermfg=blue ctermbg=yellow
+
+let g:go_highlight_functions = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
 
 
 " Remove trailing whitespace on save for py files.
@@ -188,16 +254,6 @@ function! s:insert_gates()
 endfunction
 autocmd BufNewFile *.{h,hpp} call <SID>insert_gates()
 
-" UltiSnips configuration
-let g:UltiSnipsExpandTrigger="<c-x>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-
-" Syntastic configuration
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
 " suppress the annoying 'match x of y', 'The only match' and 'Pattern not
 " found' messages
 set shortmess+=c
@@ -205,106 +261,60 @@ set shortmess+=c
 " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <c-c> <ESC>
 
-" When the <Enter> key is pressed while the popup menu is visible, it only
-" hides the menu. Use this mapping to close the menu and also start a new
-" line.
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+inoremap <silent><expr> <c-.> coc#refresh()
 
-" Use <TAB> to select the popup menu:
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+nmap <silent> E <Plug>(coc-diagnostic-prev)
+nmap <silent> W <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>l <Plug>(coc-diagnostic-info)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
-" wrap existing omnifunc
-" Note that omnifunc does not run in background and may probably block the
-" editor. If you don't want to be blocked by omnifunc too often, you could
-" add 180ms delay before the omni wrapper:
-"  'on_complete': ['ncm2#on_complete#delay', 180,
-"               \ 'ncm2#on_complete#omni', 'csscomplete#CompleteCSS'],
-au User Ncm2Plugin call ncm2#register_source({
-        \ 'name' : 'css',
-        \ 'priority': 9,
-        \ 'subscope_enable': 1,
-        \ 'scope': ['css','scss'],
-        \ 'mark': 'css',
-        \ 'word_pattern': '[\w\-]+',
-        \ 'complete_pattern': ':\s*',
-        \ 'on_complete': ['ncm2#on_complete#omni', 'csscomplete#CompleteCSS'],
-        \ })
 
-" airline
-set laststatus=2
-let g:airline_left_sep=""
-let g:airline_left_alt_sep="|"
-let g:airline_right_sep=""
-let g:airline_right_alt_sep="|"
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#show_tab_nr = 1
-let g:airline#extensions#tabline#tab_nr_type = 1 " show tab number not number of split panes
-let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline_theme='jellybeans'
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
-let g:rustfmt_autosave = 1
-let g:rustfmt_command = 'rustup run stable rustfmt'
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
-" ALE maps
-map <Leader>e :ALEDetail<cr>
-map <Leader>l :ALELint<cr>
-" ALE config
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 1
-let g:ale_lint_on_save = 0
-let g:ale_lint_on_enter = 0
-let g:ale_virtualtext_cursor = 1
-let g:ale_rust_rls_config = {
-	\ 'rust': {
-		\ 'all_targets': 1,
-		\ 'build_on_save': 1,
-		\ 'clippy_preference': 'on'
-	\ }
-	\ }
-let g:ale_rust_rls_executable = 'rls'
-let g:ale_rust_rls_toolchain = 'nightly'
-let g:ale_rust_rustc_options = '-Z no-codegen'
-let g:ale_linters = {
-      \'rust': ['rls'],
-      \'markdown': ['proselint', 'redpen', 'vale'],
-      \'text': ['proselint', 'vale'],
-      \}
-let g:ale_fixers = {'rust': ['remove_trailing_lines', 'rustfmt', 'trim_whitespaces']}
-highlight link ALEWarningSign Todo
-highlight link ALEErrorSign WarningMsg
-highlight link ALEVirtualTextWarning Todo
-highlight link ALEVirtualTextInfo Todo
-highlight link ALEVirtualTextError WarningMsg
-highlight ALEError guibg=None
-highlight ALEWarning guibg=None
-let g:ale_sign_error = "✖"
-let g:ale_sign_warning = "⚠"
-let g:ale_sign_info = "i"
-let g:ale_sign_hint = "➤"
-nmap <silent> <C-p> <Plug>(ale_previous_wrap)
-nmap <silent> <C-n> <Plug>(ale_next_wrap)
-nnoremap <silent> K :ALEHover<CR>
-nnoremap <silent> gd :ALEGoToDefinition<CR>
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" allow to scroll in the preview
+set mouse=a
+
+" mappings
+nnoremap <silent> <space><space> :<C-u>CocFzfList<CR>
+nnoremap <silent> <space>a       :<C-u>CocFzfList diagnostics<CR>
+nnoremap <silent> <space>b       :<C-u>CocFzfList diagnostics --current-buf<CR>
+nnoremap <silent> <space>c       :<C-u>CocFzfList commands<CR>
+nnoremap <silent> <space>e       :<C-u>CocFzfList extensions<CR>
+nnoremap <silent> <space>l       :<C-u>CocFzfList location<CR>
+nnoremap <silent> <space>o       :<C-u>CocFzfList outline<CR>
+nnoremap <silent> <space>s       :<C-u>CocFzfList symbols<CR>
+nnoremap <silent> <space>p       :<C-u>CocFzfListResume<CR>
 
 " Required for operations modifying multiple buffers like rename.
 set hidden
-
-let g:LanguageClient_devel = 1 " Use rust debug build
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['/home/peer/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-    \ 'python': ['/usr/local/bin/pyls'],
-    \ }
-let g:LanguageClient_autoStart = 1
-
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-" Or map each action separately
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
-" autocmd BufWritePre *.py 0,$!yapf
