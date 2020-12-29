@@ -88,7 +88,7 @@ let g:lightline = {
   \ 'active': {
   \   'left': [
   \     [ 'mode', 'paste' ],
-  \     [ 'fugitive', 'git', 'diagnostic', 'cocstatus', 'filename', 'method' ]
+  \     [ 'branch', 'git', 'diagnostic', 'cocstatus', 'filename', 'method' ]
   \   ],
   \   'right':[
   \     [
@@ -106,6 +106,7 @@ let g:lightline = {
   \   'blame': 'LightlineGitBlame',
   \   'dicon': 'LightlineWebDevIcons',
   \   'fugitive': 'LightlineFugitive',
+  \   'branch': 'LightlineGitBranch',
   \ },
   \ 'subseparator': { 'left': '|', 'right': '|' }
 \ }
@@ -130,6 +131,12 @@ function! LightlineFilename()
         \ (LightlineModified() !=# '' ? ' ' . LightlineModified() : '')
 endfunction
 
+function! LightlineGitBranch()
+  let branch = get(g:, 'coc_git_status', '')
+  let lines = get(b:, 'coc_git_status', '')
+
+  return branch . lines
+endfunction
 
 function! LightlineFugitive()
   try
@@ -146,12 +153,12 @@ endfunction
 function! LightlineGitBlame() abort
   let blame = get(b:, 'coc_git_blame', '')
   " return blame
-  return winwidth(0) > 120 ? blame : ''
+  return winwidth(0) > 80 ? strchars(blame)>50? strcharpart(blame,0,50) : blame : ''
 endfunction
 
 function! LightlineWebDevIcons() abort
   return &buftype ==# 'terminal' || &filetype =~# 'denite\|tagbar' ? '' :
-        \ winwidth(0) > 120 ? (strlen(&filetype) ? (exists('*WebDevIconsGetFileTypeSymbol') ?  WebDevIconsGetFileTypeSymbol() : &filetype) : 'no ft') : ''
+        \ winwidth(0) > 80 ? (strlen(&filetype) ? (exists('*WebDevIconsGetFileTypeSymbol') ?  WebDevIconsGetFileTypeSymbol() : &filetype) : 'no ft') : ''
 endfunction
 
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
