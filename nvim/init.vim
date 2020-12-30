@@ -49,6 +49,7 @@ Plug 'tell-k/vim-autopep8'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'antoinemadec/coc-fzf'
+Plug 'josa42/vim-lightline-coc'
 
 
 " FZF / Ctrlp for file navigation
@@ -82,6 +83,9 @@ Plug 'tpope/vim-fugitive'
 " Add plugins to &runtimepath
 call plug#end()
 
+" Mode shown in lightline
+set noshowmode
+
 " lightline
 let g:lightline = {
   \ 'colorscheme': 'wombat',
@@ -92,13 +96,12 @@ let g:lightline = {
   \   ],
   \   'right':[
   \     [
+  \       'dicon',
+  \       'fileencoding',
   \       'lineinfo',
   \     ],
-  \     [
-  \       'dicon',
-  \       'fileencoding'
-  \     ],
-  \     [ 'blame' ]
+  \     [ 'linter_info', 'linter_hints', 'linter_errors', 'linter_warnings', 'linter_ok' ],
+  \     [ 'status', 'blame' ]
   \   ],
   \ },
   \ 'component_function': {
@@ -107,9 +110,31 @@ let g:lightline = {
   \   'dicon': 'LightlineWebDevIcons',
   \   'fugitive': 'LightlineFugitive',
   \   'branch': 'LightlineGitBranch',
+  \   'linter_warnings': 'lightline#coc#warnings',
+  \   'linter_errors': 'lightline#coc#errors',
+  \   'linter_info': 'lightline#coc#info',
+  \   'linter_hints': 'lightline#coc#hints',
+  \   'linter_ok': 'lightline#coc#ok',
+  \   'status': 'lightline#coc#status',
   \ },
-  \ 'subseparator': { 'left': '|', 'right': '|' }
+  \ 'component_type': {
+  \   'linter_warnings': 'warning',
+  \   'linter_errors': 'error',
+  \   'linter_info': 'info',
+  \   'linter_hints': 'hints',
+  \   'linter_ok': 'left',
+  \ },
+  \ 'subseparator': { 'left': '', 'right': '' }
 \ }
+
+" Set color to the components:
+let g:lightline.component_type = {
+  \   'linter_warnings': 'warning',
+  \   'linter_errors': 'error',
+  \   'linter_info': 'info',
+  \   'linter_hints': 'hints',
+  \   'linter_ok': 'left',
+  \ }
 
 function! LightlineModified()
   return &ft ==# 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
