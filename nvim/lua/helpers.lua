@@ -34,18 +34,6 @@ local function trigger_completion()
       return vim.fn["compe#confirm"]()
     end
   end
-
-   local prev_col, next_col = vim.fn.col(".") - 1, vim.fn.col(".")
-  local prev_char = vim.fn.getline("."):sub(prev_col, prev_col)
-  local next_char = vim.fn.getline("."):sub(next_col, next_col)
-
-  -- minimal autopairs-like behaviour
-  if prev_char == "{" and next_char ~= "}" then return Util.t("<CR>}<C-o>O") end
-  if prev_char == "[" and next_char ~= "]" then return Util.t("<CR>]<C-o>O") end
-  if prev_char == "(" and next_char ~= ")" then return Util.t("<CR>)<C-o>O") end
-  if prev_char == ">" and next_char == "<" then return Util.t("<CR><C-o>O") end -- html indents
-  if prev_char == "(" and next_char == ")" then return Util.t("<CR><C-o>O") end -- flutter indents
-
   return t("<CR>")
 end
 
