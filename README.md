@@ -1,5 +1,6 @@
 # .dotfiles
-- [shell](shell/): urxvt configuration
+- [shell](shell/): shell configuration
+- [alacritty](alacritty/): alacritty terminal configuration
 - [zsh](zsh/): zsh configuration (assumes oh-my-zsh on default location)
 - [xkb](xkb/): Custom keyboard layout
 - [sway](sway/): sway-wm configuration
