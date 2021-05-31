@@ -34,8 +34,21 @@ local function trigger_completion()
       return vim.fn["compe#confirm"]()
     end
   end
+
+  local prev_col, next_col = vim.fn.col(".") - 1, vim.fn.col(".")
+  local prev_char = vim.fn.getline("."):sub(prev_col, prev_col)
+  local next_char = vim.fn.getline("."):sub(next_col, next_col)
+
+  if prev_char == "{" and next_char ~= "}" then return t("<CR>}<C-o>O") end
+  if prev_char == "[" and next_char ~= "]" then return t("<CR>]<C-o>O") end
+  if prev_char == "(" and next_char ~= ")" then return t("<CR>)<C-o>O") end
+  if prev_char == ">" and next_char == "<" then return t("<CR><C-o>O") end -- html indents
+  if prev_char == "(" and next_char == ")" then return t("<CR><C-o>O") end -- flutter indents
+  print("returning cr")
   return t("<CR>")
 end
+-- TODO: for some reason I cannot use this through the helper module in compe config
+_G.trigger_completion = trigger_completion
 
 local function check_backspace()
   local curr_col = vim.fn.col(".")

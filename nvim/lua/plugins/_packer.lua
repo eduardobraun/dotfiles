@@ -22,8 +22,10 @@ return packer.startup(function()
   use 'lervag/vimtex'
   -- LSP
   use 'neovim/nvim-lspconfig'
-  use 'nvim-lua/lsp_extensions.nvim' -- Temp, VirtualText types
+  -- use 'nvim-lua/lsp_extensions.nvim' -- Temp, VirtualText types
   use 'nvim-lua/lsp-status.nvim' -- Messages @ statusbar
+  -- Language Specific
+  use 'simrat39/rust-tools.nvim'
   -- Git/VC/CICD
   use 'airblade/vim-gitgutter'
   use 'tpope/vim-fugitive'

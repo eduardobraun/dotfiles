@@ -28,8 +28,10 @@ require("compe").setup {
 vim.api.nvim_set_keymap(
   "i",
   "<CR>",
-  [[<Cmd>lua require'helpers'.trigger_completion()<CR>]],
-  { silent = true }
+  table.concat({
+  "v:lua.trigger_completion()",
+  }),
+  {expr = true, silent = true }
 )
 vim.api.nvim_set_keymap(
   "i",
