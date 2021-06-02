@@ -31,5 +31,4 @@ vim.o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
 vim.cmd('filetype plugin on') -- filetype detection
 vim.cmd('set listchars=tab:→\\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨')
 vim.cmd('set list')
-vim.g.gitgutter_enabled = true
 vim.cmd('let g:gitgutter_enabled = 1')

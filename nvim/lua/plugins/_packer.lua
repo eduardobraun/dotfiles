@@ -7,7 +7,13 @@ return packer.startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
   -- Visuals
+  use {
+        'norcalli/nvim-colorizer.lua',
+        config = function() require'colorizer'.setup() end,
+  }
   use 'lifepillar/vim-gruvbox8'
+  use 'npxbr/gruvbox.nvim'
+  use 'rktjmp/lush.nvim'
   use 'machakann/vim-highlightedyank'
   use 'ryanoasis/vim-devicons'
   use {
@@ -24,6 +30,10 @@ return packer.startup(function()
   use 'neovim/nvim-lspconfig'
   -- use 'nvim-lua/lsp_extensions.nvim' -- Temp, VirtualText types
   use 'nvim-lua/lsp-status.nvim' -- Messages @ statusbar
+  use {
+    'ray-x/lsp_signature.nvim', -- function signature popup
+    config = function() require('plugins._lsp_signature') end,
+  }
   -- Language Specific
   use 'simrat39/rust-tools.nvim'
   -- Git/VC/CICD

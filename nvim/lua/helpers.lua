@@ -36,8 +36,6 @@ local function trigger_completion()
   end
   return t("<CR>")
 end
--- TODO: for some reason I cannot use this through the helper module in compe config
-_G.trigger_completion = trigger_completion
 
 local function check_backspace()
   local curr_col = vim.fn.col(".")
