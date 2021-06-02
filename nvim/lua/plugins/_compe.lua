@@ -29,7 +29,7 @@ vim.api.nvim_set_keymap(
   "i",
   "<CR>",
   table.concat({
-  "v:lua.trigger_completion()",
+  "v:lua.helpers.trigger_completion()",
   }),
   {expr = true, silent = true }
 )
@@ -37,7 +37,7 @@ vim.api.nvim_set_keymap(
   "i",
   "<Tab>",
   table.concat({
-    "pumvisible() ? \"<C-n>\" : v:lua.require('helpers').check_backspace()",
+    "pumvisible() ? \"<C-n>\" : v:lua.helpers.check_backspace()",
     "? \"<Tab>\" : compe#confirm()",
   }),
   { silent = true, noremap = true, expr = true }
