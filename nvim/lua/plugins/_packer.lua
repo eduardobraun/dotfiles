@@ -36,9 +36,11 @@ return packer.startup(function()
   }
   -- Language Specific
   use 'simrat39/rust-tools.nvim'
+  use 'DingDean/wgsl.vim' -- wgsl syntax
   -- Git/VC/CICD
   use 'airblade/vim-gitgutter'
   use 'tpope/vim-fugitive'
+  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
   -- Completion/Snips
   use {
     "hrsh7th/nvim-compe",
@@ -69,5 +71,9 @@ return packer.startup(function()
         { "JoosepAlviste/nvim-ts-context-commentstring" },
       },
       config = function() require('plugins._treesitter') end,
+  }
+  use {
+    "folke/which-key.nvim",
+    config = function() require("plugins._whichkey") end,
   }
 end)

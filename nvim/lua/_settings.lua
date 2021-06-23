@@ -16,7 +16,7 @@ vim.cmd('set expandtab')
 vim.bo.smartindent = true
 vim.wo.number = true
 vim.wo.relativenumber = true
-vim.g.mapleader = ','
+vim.g.mapleader = ' '
 vim.o.mouse = "a"
 vim.o.conceallevel = 0
 vim.wo.cursorline = true -- Enable highlighting of the current line
