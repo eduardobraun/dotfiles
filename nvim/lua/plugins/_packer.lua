@@ -37,6 +37,7 @@ return packer.startup(function()
   -- Language Specific
   use 'simrat39/rust-tools.nvim'
   use 'DingDean/wgsl.vim' -- wgsl syntax
+  use 'fatih/vim-go'
   -- Git/VC/CICD
   use 'airblade/vim-gitgutter'
   use 'tpope/vim-fugitive'

@@ -1,6 +1,4 @@
-local wk = require("which-key")
-
-wk.register({
+require("which-key").register({
   ["<leader>"] = {
     f = {
       name = "+file",
@@ -11,7 +9,7 @@ wk.register({
   },
 })
 
-wk.register({
+require("which-key").register({
   ["<leader>"] = {
     c = {
       name = "+code",
@@ -27,7 +25,7 @@ wk.register({
   },
 })
 
-wk.register({
+require("which-key").register({
   ["<leader>"] = {
     w = {
       name = "+window",

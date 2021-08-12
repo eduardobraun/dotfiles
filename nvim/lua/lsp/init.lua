@@ -37,3 +37,6 @@ end
 
 require('lsp/_rust')
 require('lsp/_lua')
+require('lsp/_ccls')
+require('lsp/_go')
+require('lsp/_texlab')
