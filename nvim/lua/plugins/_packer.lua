@@ -14,6 +14,7 @@ return packer.startup(function()
   use 'lifepillar/vim-gruvbox8'
   use 'npxbr/gruvbox.nvim'
   use 'rktjmp/lush.nvim'
+  use 'EdenEast/nightfox.nvim' -- trying new theme
   use 'machakann/vim-highlightedyank'
   use 'ryanoasis/vim-devicons'
   use {
@@ -38,6 +39,7 @@ return packer.startup(function()
   use 'simrat39/rust-tools.nvim'
   use 'DingDean/wgsl.vim' -- wgsl syntax
   use 'fatih/vim-go'
+  use 'liuchengxu/graphviz.vim'
   -- Git/VC/CICD
   use 'airblade/vim-gitgutter'
   use 'tpope/vim-fugitive'

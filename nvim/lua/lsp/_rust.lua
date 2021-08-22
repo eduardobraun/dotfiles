@@ -6,11 +6,57 @@
 --     enabled = { "ChainingHint" }
 -- }
 
+local function printdot(err, method, result, client_id, bufnr, config)
+    local api = vim.api
+    if err ~= nil then
+        return err
+    end
+
+    print(vim.inspect(result))
+    -- print(vim.inspect(method))
+    local buf = api.nvim_create_buf(false, true) -- create new emtpy buffer
+
+    api.nvim_buf_set_option(buf, 'bufhidden', 'wipe')
+
+    -- get dimensions
+    local width = api.nvim_get_option("columns")
+    local height = api.nvim_get_option("lines")
+
+    -- calculate our floating window size
+    local win_height = math.ceil(height * 0.8 - 4)
+    local win_width = math.ceil(width * 0.8)
+
+    -- and its starting position
+    local row = math.ceil((height - win_height) / 2 - 1)
+    local col = math.ceil((width - win_width) / 2)
+
+    -- set some options
+    local opts = {
+        style = "minimal",
+        relative = "editor",
+        width = win_width,
+        height = win_height,
+        row = row,
+        col = col
+    }
+
+    -- and finally create it with buffer attached
+    local win = api.nvim_open_win(buf, true, opts)
+
+    local lines = {}
+    for l in vim.gsplit(result, "\n") do
+        table.insert(lines, l)
+    end
+
+    -- print(vim.inspect(lines))
+    api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+end
+
 local lsp_config = {
   on_attach = _G.lsp_on_attach,
+  handlers = {},
   settings = {
     ["rust-analyzer"] = {
-      rainbowHighlightingOn = true,
       assist = {
         importGranularity = "module",
         importPrefix = "by_self",
@@ -24,6 +70,8 @@ local lsp_config = {
     }
   },
 }
+
+lsp_config.handlers["rust-analyzer/viewCrateGraph"] = printdot
 
 local opts = {
     tools = { -- rust-tools options
