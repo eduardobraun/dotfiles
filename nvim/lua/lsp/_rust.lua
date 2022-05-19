@@ -142,6 +142,6 @@ local opts = {
 
 require('rust-tools').setup(opts)
 
-vim.api.nvim_exec([[
-autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost * lua require'rust-tools.inlay_hints'.set_inlay_hints()
-]], false)
+--vim.api.nvim_exec([[
+--autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs lua require'rust-tools.inlay_hints'.set_inlay_hints()
+--]], false)

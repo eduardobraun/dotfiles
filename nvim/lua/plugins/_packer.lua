@@ -25,7 +25,7 @@ return packer.startup(function()
     config = function() require('plugins._lualine') end,
   }
   -- Markup/Text
-  use 'cespare/vim-toml'
+  use {'cespare/vim-toml', branch = 'main'}
   use 'lervag/vimtex'
   -- LSP
   use 'neovim/nvim-lspconfig'
@@ -40,6 +40,8 @@ return packer.startup(function()
   use 'DingDean/wgsl.vim' -- wgsl syntax
   use 'fatih/vim-go'
   use 'liuchengxu/graphviz.vim'
+  use "jose-elias-alvarez/null-ls.nvim"
+  use "jose-elias-alvarez/nvim-lsp-ts-utils"
   -- Git/VC/CICD
   use 'airblade/vim-gitgutter'
   use 'tpope/vim-fugitive'
